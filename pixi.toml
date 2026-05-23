@@ -1,0 +1,30 @@
+[workspace]
+channels = ["conda-forge", "bioconda"]
+channel-priority = "disabled"
+name = "splicing"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+scan-splash-align-build = "cd ./fast_align_cpp && pixi run -e main python setup.py build_ext --inplace"
+
+[dependencies]
+
+[feature.main.dependencies]
+python = "3.10.*"
+cxx-compiler = ">=1.9.0,<2"
+samtools = ">=1.23.1,<2"
+pybind11 = ">=2.12,<3"
+setuptools = "<82.0.0"
+scipy = ">=1.15.2,<2"
+subread = ">=2.1.1,<3"
+star = ">=2.7.11b,<3"
+bowtie = ">=1.3.1,<2"
+tqdm = ">=4.67.3,<5"
+matplotlib = ">=3.10.9,<4"
+
+[feature.main.pypi-dependencies]
+scan-splash-align = { path = "./fast_align_cpp", editable = true }
+
+[environments]
+main = ['main']
